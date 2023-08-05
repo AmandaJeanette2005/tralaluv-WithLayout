@@ -1,35 +1,24 @@
-import { Route, Routes } from 'react-router-dom'
-import Home from './layouts/pages/home'
-import About from './layouts/pages/about'
-import { Fragment } from 'react'
-import { Navbar } from './layouts/Navbar'
-import { NavCategoryMenu } from './layouts/Navbar/NavCategoryMenu'
-import { Box, Center, Container, Flex } from '@chakra-ui/react'
-import Xperience from './layouts/pages/xperience'
-import Transport from './layouts/pages/transport'
-import Hotel from './layouts/pages/hotel'
+import { Route, Routes, useNavigate } from "react-router-dom"
+import CustLayout from "./layouts/CustLayout"
+import Login from "./layouts/pages/Login"
+import SignUp from "./layouts/pages/SignUp"
+import { onAuthStateChanged } from "firebase/auth"
+import { auth } from "./config/firebase"
 
 function App() {
+
+  // let navigate =  useNavigate()
+
+  // onAuthStateChanged(auth, (user)=>{
+  //   navigate('/')
+  // })
   
   return (
-      <Flex flexDirection={"column"} height={"100vh"}>
-        <Container maxW={'container.xl'}>
-          <Navbar />  
-          <NavCategoryMenu.Desktop/>  
-        </Container>
-        
-        <Container maxW={'container.xl'}>
-          <Routes>
-              <Route index element={<Home/>}/>
-              <Route path='about' element={<About/>}/>
-              <Route path='transport' element={<Transport/>}/>
-              <Route path='xperience' element={<Xperience/>}/>
-              <Route path='hotel' element={<Hotel/>}/>
-          </Routes>
-        </Container>
-
-        <Container maxW={'container.xl'}></Container>
-        </Flex>
+      <Routes>
+        <Route path='*' element={<CustLayout/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/sign-up" element={<SignUp/>}/>
+      </Routes>
   )
 }
 

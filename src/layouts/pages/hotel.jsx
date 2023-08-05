@@ -210,7 +210,9 @@ const Hotel = () => {
             <Text>Book {view.name} {view.type}!</Text>
             </ModalHeader>
             }
+
             <ModalCloseButton />
+            
             {status === 'view' ? 
             <>
             <ModalViewHotel data={view}/>
