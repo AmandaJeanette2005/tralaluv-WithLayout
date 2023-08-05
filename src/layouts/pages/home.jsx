@@ -6,8 +6,20 @@ import {
     VStack,
     useBreakpointValue,
   } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { auth } from '../../config/firebase';
+import { signOut } from 'firebase/auth';
 
 const Home = () => {
+
+    let navigate = useNavigate()  
+
+    const handleLogout = async () => {
+        await signOut(auth)
+        navigate('/login')
+        console.log("log out ")
+
+      }
   return (
      <Flex
       width={"100%"}
@@ -45,6 +57,7 @@ const Home = () => {
               _hover={{ bg: 'whiteAlpha.500' }}>
               Show me more
             </Button>
+            <Button onClick={() => handleLogout()}>Log Out</Button>
           </Stack>
         </Stack>
       </VStack>

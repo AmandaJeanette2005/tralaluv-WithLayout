@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Center,
   Container,
   Flex,
@@ -19,6 +20,12 @@ import { NavAction } from './NavAction'
 import { NavCategoryMenu } from './NavCategoryMenu'
 import { NavCategorySubmenu } from './NavCategorySubmenu'
 import { SearchInput } from './SearchInput'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../config/firebase'
+import { useNavigate } from 'react-router-dom'
+
+
+
 
 export const Navbar = () => (
           <Flex height="4.5rem" align="center" width={"full"}  mx="auto">

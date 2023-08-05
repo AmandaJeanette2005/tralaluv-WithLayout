@@ -1,4 +1,7 @@
-import { Box, Center, Flex, HStack, Icon, Text, useColorModeValue as mode } from '@chakra-ui/react'
+import { ChevronDownIcon } from '@chakra-ui/icons'
+import { Box, Button, Center, Flex, HStack, Icon, Menu, MenuButton, MenuItem, MenuList, Text, useColorModeValue as mode } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
+
 const MobileNavAction = (props) => {
   const { label, icon, isActive, href, children } = props
   return (
@@ -25,10 +28,11 @@ const MobileNavAction = (props) => {
     </Center>
   )
 }
+
 const DesktopNavAction = (props) => {
-  const { label, icon, href = '#' } = props
+  const { label, icon, href = '/sign-up' } = props
   return (
-    <HStack spacing="2" as="a" href={href}>
+    <HStack spacing="2" as="a" href={'/sign-up'}>
       <Text fontSize="sm" fontWeight="semibold">
         {label}
       </Text>

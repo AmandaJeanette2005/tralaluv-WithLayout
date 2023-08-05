@@ -18,6 +18,7 @@ const ModalBookHotel = ({dataHotel, close}) => {
 
 
     const handleBook = async () => {
+      try {
         const url = 'http://localhost:2070'
         const data = {
             hotel_id:dataHotel.id,
@@ -30,8 +31,17 @@ const ModalBookHotel = ({dataHotel, close}) => {
             guests: buy.guests,
             price: price
         }
-        const get = await axios.post(`${url}/inv-hotel`, data)
+        const inv = await axios.post(`${url}/inv-hotel`, data)
+
+        const stock = dataHotel.available_room - duration
+        const updateStock = await axios.put(`${url}/hotel/${dataHotel.id}`,{
+          available_room: stock
+        })
         close()
+      } catch (error) {
+        throw error
+      }
+        
     }
 
     
@@ -68,7 +78,7 @@ const ModalBookHotel = ({dataHotel, close}) => {
             <Input type='date' onChange={(e) => setCheckIn(e.target.value)}/>
             <FormLabel mt={'1rem'}>Duration</FormLabel>
             <Input type='number' onChange={(e) => onChangeDuration(e.target.valueAsNumber)}/>
-            <FormLabel mt={'1rem'} color={'red'}>Check Out : { duration == false ? 'chose check in date!' : dayjs(checkOut).format('YYYY-MM-DD')}</FormLabel>
+            <FormLabel mt={'1rem'} color={'red'}>Check Out : { duration == false ? 'chose check in date and duration!' : dayjs(checkOut).format('YYYY-MM-DD')}</FormLabel>
             <FormLabel mt={'1rem'}>guests</FormLabel>
             <Input type='number' onChange={(e) => setBuy({...buy, guests: e.target.value})}/>
             <FormLabel mt={'1rem'} color={'green.700'}>Price : {price}</FormLabel>
